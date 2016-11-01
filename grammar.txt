@@ -5,19 +5,19 @@ notice：首字母大写的除了ID外为非终结符，剩下的为终结符，
 ''''''''''''''''''''''''''''''''''''
 '句子
 ''''''''''''''''''''''''''''''''''''
-Sentence --> Include | Statement | Assignment | Control | Expression | Constant | FunctionStatement | FunctionCall //克林闭包
+Sentence --> Import | DeclareStatement | Assignment | Control | Expression | Constant | FunctionStatement | FunctionCall //克林闭包
 
 
 ''''''''''''''''''''''''''''''''''''
-'导入语句include
+'导入语句 <Import>
 ''''''''''''''''''''''''''''''''''''
-Include --> #include < ID > | #include "ID"
+Import --> use ID
 
 
 ''''''''''''''''''''''''''''''''''''
-'声明语句
+'声明语句 <DeclareStatement>
 ''''''''''''''''''''''''''''''''''''
-Statement --> Type ID; | Type ID[ Constant ]; | Type ID[ Constant ] = { ConstantList };
+Statement --> ID : Type 
 Type --> int | float 
 ConstantList --> ∑ | Constant ConstantRest
 ConstantRest --> ∑ | ,Constant | ConstantRest
@@ -25,10 +25,18 @@ ConstantRest --> (,Constant)*
 
 
 ''''''''''''''''''''''''''''''''''''
-'赋值语句
+'赋值语句 <Assignment>
 '''''''''''''''''''''''''''''''''''' 
-Assignment --> ID = Expression;
+Assignment --> ID : Type = Expression
+Assignment --> ID = Expression
 
+''''''''''''''''''''''''''''''''''''
+'表达式 <Expression>
+'''''''''''''''''''''''''''''''''''' 
+Expression --> ( Expression ) | Expression BinaryOperator Expression | UnaryOperator Expression | ArrayIndex | Constant
+ArrayIndex --> ID.Constant 
+UnaryOperator --> ! | ++ | --
+BinaryOperator --> + | - | * | / | ++ | -- | > | < | >= | <= | &
 
 ''''''''''''''''''''''''''''''''''''
 '控制语句
@@ -41,13 +49,7 @@ WhileControl --> while( Expression ){ Sentence }
 ForControl --> for( Assignment; Expression; Expression ){ Sentence }
 
 
-''''''''''''''''''''''''''''''''''''
-'表达式
-'''''''''''''''''''''''''''''''''''' 
-Expression --> ( Expression ) | Expression Operator Expression | SingleOperator Expression | ArrayIndex | Constant
-ArrayIndex --> ID[ Constant ]
-SingleOperator --> ! | ++ | --
-Operate --> + | - | * | / | ++ | -- | > | < | >= | <= | &
+
 
 
 ''''''''''''''''''''''''''''''''''''
